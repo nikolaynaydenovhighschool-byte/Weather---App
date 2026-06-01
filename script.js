@@ -41,7 +41,7 @@ function changeBackgroundByWeather(weatherCode) {
     document.body.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('${imageUrl}')`;
 }
 
-// 3. Слушател за натискане на бутона за търсене
+//  Слушател за натискане на бутона за търсене
 searchForm.addEventListener('submit', function(event) {
     event.preventDefault(); 
     const city = searchInput.value.trim();
@@ -55,7 +55,7 @@ searchForm.addEventListener('submit', function(event) {
     }
 });
 
-// 4. Свързване на кодовете на времето с емоджита
+//  Свързване на кодовете на времето с емоджита
 function getWeatherEmoji(weatherCode) {
     const emojiMap = {
         0: "☀️", 1: "🌤️", 2: "⛅", 3: "☁️", 
@@ -69,7 +69,7 @@ function getWeatherEmoji(weatherCode) {
     return emojiMap[weatherCode] || "❓"; 
 }
 
-// 5. ЕТАП 1: Геокодиране (Превръщане на име на град в координати)
+//  Геокодиране
 function getCoordinates(city) {
     fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`)
         .then(response => response.json())
@@ -92,15 +92,15 @@ function getWeather(lat, lon, cityName) {
             const weather = data.current_weather;
             lastTempC = weather.temperature;
             
-            // Първо: Правим кутията видима и попълваме текстовете
+            // Правим кутията видима и попълваме текстовете
             displayWeather(cityName, weather);
             
-            // Второ: Сменяме фона плавно според времето
+            //  Сменяме фона плавно според времето
             changeBackgroundByWeather(weather.weathercode);
             
-            // Трето: Логика за зареждане на ЦВЕТНАТА карта
+            //  Логика за зареждане на ЦВЕТНАТА карта
             if (map === null) {
-                // Инициализираме я за първи път (мащаб 10 за хубав детайлен изглед на града)
+                // Инициализираме я за първи път 
                 map = L.map('map').setView([lat, lon], 10); 
                 
                 // Използваме стандартния цветен слой на OpenStreetMap
@@ -112,13 +112,12 @@ function getWeather(lat, lon, cityName) {
                 map.setView([lat, lon], 10);
             }
 
-            // Важен фикс: Изчакваме съвсем малко интерфейсът да се намести и казваме на картата да се преизчисли,
-            // за да не се получи бъг със сив екран.
+            //  Изчакваме съвсем малко интерфейсът да се намести и казваме на картата да се преизчисли.
             setTimeout(() => {
                 if (map) map.invalidateSize();
             }, 150);
 
-            // Четвърто: Добавяне на живия дъждовен радар над цветната карта
+            //  Добавяне на живия дъждовен радар над цветната карта
             if (radarLayer !== null) {
                 map.removeLayer(radarLayer); // Трием стария радар, за да не се трупат слоеве
             }
@@ -135,14 +134,22 @@ function displayWeather(cityName, weatherData) {
     loadingDisplay.style.display = 'none';
     weatherInfo.style.display = 'block';
 
-    document.getElementById('city-name').textContent = cityName;
+    // ВЗЕМАМЕ ТЕКУЩАТА ДАТА И ЧАС
+    const now = new Date();
+    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const dateString = now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+    // Попълваме името на града + часа
+    document.getElementById('city-name').textContent = `${cityName} (${timeString})`;
+    
+    // Създаваме малък тестов елемент за датата, ако искаш да се вижда (или я добавяме към condition)
+    document.getElementById('weather-condition').textContent = `Condition Code: ${weatherData.weathercode} | ${dateString}`;
+    
     document.getElementById('wind-speed').textContent = `Wind Speed: ${weatherData.windspeed} m/s`;
-    document.getElementById('weather-condition').textContent = `Condition Code: ${weatherData.weathercode}`;
 
     weatherEmoji.textContent = getWeatherEmoji(weatherData.weathercode);
     updateTemperatureDisplay(); 
 }
-
 //  Математическа функция за преобразуване на градусите
 function updateTemperatureDisplay() {
     if (lastTempC === null) return;
