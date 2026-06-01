@@ -1,0 +1,135 @@
+/* Основен фон на приложението */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(45deg, #1e3c72, #2a5982); /* Първоначален фон */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: background-image 0.8s ease-in-out; /* Плавно преливане на фоновата снимка */
+}
+
+/* Контейнер за стъклен фон (Glassmorphism Card) */
+.weather-app {
+    background: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(15px); 
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
+    width: 380px;
+    text-align: center;
+}
+
+/* Форма за търсене */
+#search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+#search-input {
+    background: rgba(255, 255, 255, 0.2); 
+    border: none;
+    border-radius: 12px;
+    padding: 12px 15px;
+    color: white;
+    width: 65%;
+    outline: none;
+}
+
+#search-input::placeholder {
+    color: rgba(255, 255, 255, 0.7); 
+}
+
+/* Бутони */
+button {
+    background: #ff7e57; 
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #feb47b; 
+}
+
+.toggle-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Елементи за времето */
+#weather-emoji {
+    font-size: 4rem; 
+    display: block;
+    margin: 15px 0;
+}
+
+#temperature {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.15); 
+    border-radius: 12px;
+    padding: 12px;
+}
+
+/* Стилизация на интерактивната карта */
+#map {
+    height: 200px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* Гарантира, че картата няма да се застъпи странно */
+}
+
+/* Управление на видимостта през JS */
+.weather-info {
+    display: none;
+}
+
+.loading {
+    display: none;
+    margin-top: 15px;
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.error {
+    display: none;
+    background-color: rgba(255, 100, 100, 0.25);
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 15px;
+    color: #ff8b8b; 
+    font-weight: 500;
+}   

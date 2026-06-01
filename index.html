@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather app</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <div class="weather-app">
+        <h1>Weather App</h1>
+        
+        <form id="search-form">
+            <label for="search-input">Enter a city:</label>
+            <input type="text" id="search-input" placeholder="City name" required>
+            <button type="submit">Search</button>
+        </form>
+
+        <button id="toggle-btn" class="toggle-btn">Switch to °F</button>
+
+        <div class="weather-info">
+            <h2 id="city-name">City Name</h2>
+            <div class="weather-main">
+                <span id="weather-emoji">☀️</span>
+                <p id="temperature">--°C</p>
+                <p id="weather-condition">Weather Condition: --</p>
+            </div>
+            <div class="weather-details">
+                <p id="wind-speed">Wind Speed: -- m/s</p>
+            </div>
+            
+            <div id="map"></div>
+        </div>
+
+        <div id="loading" class="loading">Loading...</div>
+        <div id="error" class="error"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
