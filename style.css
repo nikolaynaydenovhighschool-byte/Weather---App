@@ -15,7 +15,7 @@ body {
     transition: background-image 0.8s ease-in-out; /* Плавно преливане на фоновата снимка */
 }
 
-/* Контейнер за стъклен фон (Glassmorphism Card) */
+/* Контейнер за стъклен фон  */
 .weather-app {
     background: rgba(255, 255, 255, 0.1); 
     backdrop-filter: blur(15px); 
@@ -60,7 +60,30 @@ button {
     color: white;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
+    /* ПРОМЕНЕНО: Добавяме плавен преход за трансформация и сянка */
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 126, 87, 0.3);
+}
+
+button:hover {
+    background: #feb47b; 
+    /* ПРОМЕНЕНО: Бутонът леко се уголемява и изскача напред */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(254, 180, 123, 0.5);
+}
+
+.toggle-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05); /* Леко го разширява */
 }
 
 button:hover {
